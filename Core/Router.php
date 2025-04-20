@@ -6,17 +6,20 @@ use Exception;
 
 class Router
 {
-  public $routes = [];
+  protected $routes = [];
+  protected static $innerData;
+
 
   public static function require(string $path)
   {
     return require BASE_PATH . $path;
   }
 
-  public static function component(string $name)
+  public static function component(string $name, array $data = [])
   {
     $path = "../resources/components/{$name}";
-    
+    extract($data);
+
     try
     {
       if (!file_exists($path)) {
@@ -30,9 +33,10 @@ class Router
     }
   }
 
-  public static function view(string $path)
+  public static function view(string $path, array $data = [])
   {
     $path = "../resources/views/{$path}.view.php";
+    extract($data);
 
     try
     {
@@ -75,9 +79,28 @@ class Router
       return $this;
   }
 
+  // Register a GET request
   public function get(string $uri, string $controller)
   {
     $this->add($uri, 'GET', $controller);
+  }
+
+  // Register a POST request
+  public function post(string $uri, string $controller)
+  {
+    $this->add($uri, 'POST', $controller);
+  }
+
+  // Register a PATCH request
+  public function patch(string $uri, string $controller)
+  {
+    $this->add($uri, 'PATCH', $controller);
+  }
+
+  // Register a DELETE request
+  public function delete(string $uri, string $controller)
+  {
+    $this->add($uri, 'DELETE', $controller);
   }
 
   public function route(string $uri, string $method)

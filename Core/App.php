@@ -15,4 +15,12 @@ class App
   {
     return static::$container;
   }
+
+  public static function inspect($data)
+  {
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
+    die();
+  }
 }

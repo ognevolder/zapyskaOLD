@@ -1,7 +1,7 @@
 <figure class="px-[5.6rem] border-[0.1rem] border-[#BFBA73] bg-[#fff]">
   <div class="my-[3.2rem] flex gap-[1.2rem]">
-    <a href="#" class="font-[Nunito] text-[1.6rem] font-[200] text-[#BFBFBF]">22/04/2025</a>
-    <a href="#" class="font-[Nunito] text-[1.6rem] font-[200] text-[#BFBA73]">#публікація</a>
+    <a href="#" class="font-[Nunito] text-[1.6rem] font-[200] text-[#BFBFBF]"><?= $post['date'] ?></a>
+    <a href="#" class="font-[Nunito] text-[1.6rem] font-[200] text-[#BFBA73]">#<?= $post['tag'] ?></a>
   </div>
   
   <div class="flex flex-col gap-[0.8rem]">

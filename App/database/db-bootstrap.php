@@ -9,7 +9,7 @@ $container = new Container;
 
 $container->bind('Core\Database', function()
 {
-  $config = Router::require('/config/db.php');
+  $config = Router::require('./config/db.php');
   return new Database($config);
 });
 
