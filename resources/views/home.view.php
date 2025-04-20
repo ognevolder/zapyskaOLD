@@ -4,7 +4,7 @@ use Core\App;
 use Core\Database;
 use Core\Router;
 
-Router::require('/database/db-bootstrap.php');
+Router::require('App/database/db-bootstrap.php');
 
 Router::component('head-open.php');
 

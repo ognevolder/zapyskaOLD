@@ -1,0 +1,16 @@
+{
+  "name": "ognevolder/project01blog",
+  "authors": [
+    {
+      "name": "ognevolder",
+      "email": "ognevolder.webdev@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "App\\": "App/",
+      "Core\\": "Core/"
+    }
+  }
+}
