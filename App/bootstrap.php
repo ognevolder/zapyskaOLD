@@ -5,11 +5,12 @@ use Core\Container;
 use Core\Database;
 use Core\Router;
 
-$container = new Container;
+$config = Router::require('config/db.php');
+$container = new Container();
 
-$container->bind('Core\Database', function()
+// DB
+$container->singletone(Database::class, function($c) use ($config)
 {
-  $config = Router::require('./config/db.php');
   return new Database($config);
 });
 

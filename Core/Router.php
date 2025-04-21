@@ -7,8 +7,6 @@ use Exception;
 class Router
 {
   protected $routes = [];
-  protected static $innerData;
-
 
   public static function require(string $path)
   {

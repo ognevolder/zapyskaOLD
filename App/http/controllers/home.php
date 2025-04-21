@@ -1,12 +1,19 @@
 <?php
 
+use App\models\PostRepository;
+use App\models\UserRepository;
 use Core\App;
-use Core\Database;
 use Core\Router;
 
-// Initiate a DB
-$db = App::useContainer()->resolve(Database::class);
-// Prepare the query and fetch the data
-$data = $db->query("SELECT * FROM posts")->fetchAll();
+// Connect to service container
+$container = App::getContainer();
 
-Router::view('home', ['data' => $data]);
+// Create DB instance and resolve Repositories
+$authorRepo = $container->resolve(UserRepository::class);
+$postRepo = $container->resolve(PostRepository::class);
+
+// Fetch data from DB
+$posts = $postRepo->all();
+$authors = $authorRepo->getAllUsersById();
+
+Router::view('home', ['posts' => $posts, 'authors' => $authors]);

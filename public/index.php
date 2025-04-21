@@ -5,7 +5,7 @@ use Core\Router;
 const BASE_PATH = __DIR__.'/../';
 
 require "../vendor/autoload.php";
-Router::require('App/database/db-bootstrap.php');
+Router::require('App/bootstrap.php');
 
 $router = new Router();
 $routes = require "../routes/web.php";

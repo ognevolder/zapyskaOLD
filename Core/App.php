@@ -11,7 +11,7 @@ class App
     static::$container = $container;
   }
 
-  public static function useContainer()
+  public static function getContainer(): object
   {
     return static::$container;
   }
@@ -21,6 +21,10 @@ class App
     echo '<pre>';
     var_dump($data);
     echo '</pre>';
-    die();
+  }
+
+  public static function getAuthorForPost(array $post, array $authors)
+  {
+    return $authors[$post['author_id']] ?? null;
   }
 }
