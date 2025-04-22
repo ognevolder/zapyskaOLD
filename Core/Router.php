@@ -15,7 +15,7 @@ class Router
 
   public static function component(string $name, array $data = [])
   {
-    $path = "../resources/components/{$name}";
+    $path = BASE_PATH . "resources/components/{$name}";
     extract($data);
 
     try
@@ -33,7 +33,7 @@ class Router
 
   public static function view(string $path, array $data = [])
   {
-    $path = "../resources/views/{$path}.view.php";
+    $path = BASE_PATH . "resources/views/{$path}.view.php";
     extract($data);
 
     try
@@ -51,7 +51,7 @@ class Router
 
   public static function response(string $code)
   {
-    $path = "../resources/response/{$code}.php";
+    $path = BASE_PATH . "resources/response/{$code}.php";
 
     try
     {
@@ -104,23 +104,10 @@ class Router
   public function route(string $uri, string $method)
   {
     foreach ($this->routes as $route) {
-      $pattern = preg_replace('#\{[^}]+\}#', '([^/]+)', $route['uri']);
-      $pattern = "#^" . $pattern . "$#";
-
-      if (preg_match($pattern, $uri, $matches) && $route['method'] === strtoupper($method)) {
-        array_shift($matches);
-
-        // Витягуємо імена параметрів {page}, {id}, ...
-        preg_match_all('#\{([^}]+)\}#', $route['uri'], $paramNames);
-        $params = [];
-
-        foreach ($paramNames[1] as $index => $name) {
-          $params[$name] = $matches[$index] ?? null;
-        }
-
-        extract($params); // Тепер змінні (наприклад, $page) доступні в контролері
-
-        return require("../App/http/controllers/{$route['controller']}");
+      
+      if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) 
+      {
+        return require BASE_PATH . "App/http/controllers/{$route['controller']}";
       }
     }
     $this->abort();

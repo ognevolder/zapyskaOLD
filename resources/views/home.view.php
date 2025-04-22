@@ -10,5 +10,6 @@ Router::component('divider.php');
 Router::component('post-grid.php', ['posts' => $posts, 'authors' => $authors]);
 Router::component('divider.php');
 Router::component('pagination.php', ['paginator' => $paginator]);
+Router::component('footer.php');
 
 Router::component('head-close.php');

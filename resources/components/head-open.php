@@ -11,5 +11,5 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <title>Записька</title>
 </head>
-<body class="flex justify-center bg-[#FFFDF7]">
+<body class="flex justify-center bg-[#FFFDF7] m-[0rem] p-[0rem]">
   <div class="w-[1440px]">

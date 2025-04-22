@@ -14,7 +14,7 @@ $authorRepo = $container->resolve(UserRepository::class);
 $postRepo = $container->resolve(PostRepository::class);
 
 // Get URL
-$page = isset($page) && is_numeric($page) ? (int)$page : 1;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 // Pagination
 $perPage = 6;
 $totalPosts = $postRepo->count();
