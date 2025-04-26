@@ -12,11 +12,11 @@ use Core\App;
   <!-- Заголовок і тіло -->
    <a href="#">
      <div class="flex flex-col gap-[0.8rem] text-[#262626] overflow-hidden">
-       <h2 class="text-[3.6rem] font-bold leading-[4.2rem] break-words overflow-hidden">
-         <?= mb_strimwidth($post['title'], 0, 70, '...') ?>
+       <h2 class="text-[3.6rem] font-bold leading-[4.2rem] break-words line-clamp-[2]">
+         <?= $post['title'] ?>
        </h2>
-       <p class="text-[1.8rem] font-normal leading-[2.4rem] break-words overflow-hidden">
-         <?= mb_strimwidth($post['body'], 0, 200, '...') ?>
+       <p class="text-[1.8rem] font-normal leading-[2.4rem] break-words line-clamp-[3]">
+         <?= $post['body'] ?>
        </p>
      </div>
    </a>

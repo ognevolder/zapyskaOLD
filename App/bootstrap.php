@@ -3,9 +3,8 @@
 use Core\App;
 use Core\Container;
 use Core\Database;
-use Core\Router;
 
-$config = Router::require('config/db.php');
+$config = require BASE_PATH . 'config/db.php';
 $container = new Container();
 
 // DB

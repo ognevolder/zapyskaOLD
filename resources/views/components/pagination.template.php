@@ -10,7 +10,7 @@
 
     <!-- Номери сторінок -->
     <?php foreach ($paginator->pages() as $page): ?>
-      <a href="?page=<?= $page ?>" class="px-[1.6rem] py-[0.8rem] border <?= $page === $paginator->currentPage ? 'border-[#025939] text-[#025939]' : 'border-[#BFBA73]' ?>">
+      <a href="?page=<?= $page ?>" class="px-[1.6rem] py-[0.8rem] border <?= $page === $paginator->currentPage ? 'border-[#025939] text-[#025939]' : 'border-[#BFBA73] text-[#BFBA73]' ?>">
         <?= $page ?>
       </a>
     <?php endforeach; ?>

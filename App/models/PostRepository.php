@@ -4,6 +4,7 @@ namespace App\models;
 
 use Core\Database;
 use PDO;
+use Faker\Factory as FakerFactory;
 
 class PostRepository
 {
@@ -50,5 +51,28 @@ class PostRepository
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll();
+  }
+
+  /**
+   * Creating a random post for DB
+   * 
+   * @return void
+   */
+  public function seedRandomPosts(int $count = 1): void
+  {
+    $faker = FakerFactory::create('uk_UA');
+
+    $sql = "INSERT INTO posts (title, body, tag, author_id) VALUES (:title, :body, :tag, :author_id)";
+    $stmt = $this->pdo->prepare($sql);
+
+    for ($i = 0; $i < $count; $i++)
+    {
+      $stmt->execute([
+        ':title' => $faker->sentence(mt_rand(4, 8)),
+        ':body' => $faker->paragraphs(mt_rand(2, 5), true),
+        ':tag' => $faker->word(),
+        ':author_id' => rand(1, 2)
+      ]);
+    }
   }
 }

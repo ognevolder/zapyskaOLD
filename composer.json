@@ -1,0 +1,18 @@
+{
+  "name": "ognevolder/project01blog",
+  "authors": [
+    {
+      "name": "ognevolder",
+      "email": "ognevolder.webdev@gmail.com"
+    }
+  ],
+  "require": {
+    "fakerphp/faker": "^1.24"
+  },
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core/",
+      "App\\": "App/"
+    }
+  }
+}

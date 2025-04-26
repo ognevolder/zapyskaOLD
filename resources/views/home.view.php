@@ -2,14 +2,14 @@
 
 use Core\Router;
 
-Router::component('head-open.php');
-
-Router::component('navbar.php');
-Router::component('hero.php');
-Router::component('divider.php');
-Router::component('post-grid.php', ['posts' => $posts, 'authors' => $authors]);
-Router::component('divider.php');
-Router::component('pagination.php', ['paginator' => $paginator]);
-Router::component('footer.php');
-
-Router::component('head-close.php');
+Router::components([
+  'head-open',
+  'navbar',
+  'hero',
+  'divider',
+  ['post-grid' => ['posts' => $posts, 'authors' => $authors]],
+  'divider',
+  ['pagination' => ['paginator' => $paginator]],
+  'footer',
+  'head-close'
+]);

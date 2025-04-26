@@ -8,40 +8,60 @@ class Router
 {
   protected $routes = [];
 
-  public static function require(string $path)
+  public static function component(string $file, array $data = []): void
   {
-    return require BASE_PATH . $path;
-  }
-
-  public static function component(string $name, array $data = [])
-  {
-    $path = BASE_PATH . "resources/components/{$name}";
+    if (!str_ends_with($file, 'template.php'))
+    {
+      $file .= '.template.php';
+    }
+    $path = BASE_PATH . "resources/views/components/{$file}";
     extract($data);
 
-    try
-    {
+    try {
       if (!file_exists($path)) {
-        throw new Exception("Component [{$name}] does not exist.");
+          throw new Exception("Component [{$path}] does not exist.");
       }
-      return require $path;
-    } catch (Exception $e) 
-    {
-      echo "Route error: ", $e->getMessage();
+      require $path;
+    } catch (Exception $e) {
+      echo "Component error: ", $e->getMessage();
       exit();
+    }
+  }
+
+  public static function components(array $list): void
+  {
+    foreach ($list as $entry) 
+    {
+      if (is_string($entry)) 
+      {
+        self::component($entry); // без даних
+      } 
+      elseif (is_array($entry)) 
+      {
+        // ['file.php' => ['posts' => $posts]]
+        foreach ($entry as $file => $data) 
+        {
+          self::component($file, $data);
+        }
+      }
     }
   }
 
   public static function view(string $path, array $data = [])
   {
-    $path = BASE_PATH . "resources/views/{$path}.view.php";
+    if (!str_ends_with($path, '.php'))
+    {
+      $path .= '.view.php';
+    }
+    $fullPath = BASE_PATH . "resources/views/{$path}";
     extract($data);
 
     try
     {
-      if (!file_exists($path)) {
-        throw new Exception("View [{$path}] does not exist.");
+      if (!file_exists($fullPath)) {
+        throw new Exception("View [{$fullPath}] does not exist.");
       }
-      return require $path;
+      return require $fullPath;
     } catch (Exception $e)
     {
       echo "Route error: ", $e->getMessage();
