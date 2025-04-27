@@ -28,5 +28,10 @@ class UserRepository
     $authors = $stmt->fetchAll();
     return array_column($authors, null, 'id');
   }
+
+  public function getAuthorForPost(array $post, array $authors)
+  {
+    return $authors[$post['author_id']] ?? null;
+  }
   
 }

@@ -16,15 +16,18 @@ class App
     return static::$container;
   }
 
+  public static function inspectIsolate($data)
+  {
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
+    die();
+  }
+
   public static function inspect($data)
   {
     echo '<pre>';
     var_dump($data);
     echo '</pre>';
-  }
-
-  public static function getAuthorForPost(array $post, array $authors)
-  {
-    return $authors[$post['author_id']] ?? null;
   }
 }
