@@ -5,7 +5,7 @@ namespace App\models;
 use Core\Database;
 use PDO;
 
-class UserRepository
+class AuthorRepository
 {
   protected PDO $pdo;
 
@@ -19,7 +19,7 @@ class UserRepository
    * 
    * @return array
    */
-  public function getAllUsersById(): array
+  public function getAllAuthorsById(): array
   {
     $sql = "SELECT * FROM authors";
     $stmt = $this->pdo->prepare($sql);
@@ -29,7 +29,7 @@ class UserRepository
     return array_column($authors, null, 'id');
   }
 
-  public function getAuthorForPost(array $post, array $authors)
+  public static function getAuthorOfPost(array $post, array $authors)
   {
     return $authors[$post['author_id']] ?? null;
   }

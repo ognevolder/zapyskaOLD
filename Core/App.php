@@ -30,4 +30,19 @@ class App
     var_dump($data);
     echo '</pre>';
   }
+  
+  // Require an array of $files
+  public static function requestAll(array $files = [])
+  {
+    foreach ($files as $file)
+    {
+      require BASE_PATH . $file;
+    }
+  }
+
+  // Require a single file
+  public static function request(string $file)
+  {
+    require BASE_PATH . $file;
+  }
 }

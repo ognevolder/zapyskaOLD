@@ -8,6 +8,11 @@ class Router
 {
   protected $routes = [];
 
+  // public function __construct()
+  // {
+    
+  // }
+
   public static function component(string $file, array $data = []): void
   {
     if (!str_ends_with($file, 'template.php'))

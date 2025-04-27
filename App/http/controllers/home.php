@@ -1,7 +1,7 @@
 <?php
 
+use App\models\AuthorRepository;
 use App\models\PostRepository;
-use App\models\UserRepository;
 use Core\App;
 use Core\Paginator;
 use Core\Router;
@@ -10,7 +10,7 @@ use Core\Router;
 $container = App::getContainer();
 
 // Create DB instance and resolve Repositories
-$authorRepo = $container->resolve(UserRepository::class);
+$authorRepo = $container->resolve(AuthorRepository::class);
 $postRepo = $container->resolve(PostRepository::class);
 
 // Get URL
@@ -23,7 +23,7 @@ $paginator = new Paginator($page, $perPage, $totalPosts);
 
 // Fetch data from DB
 $posts = $postRepo->paginate($paginator->perPage, $paginator->offset());
-$authors = $authorRepo->getAllUsersById();
+$authors = $authorRepo->getAllAuthorsById();
 
 Router::view('home', [
   'posts' => $posts,
