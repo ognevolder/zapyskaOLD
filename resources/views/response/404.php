@@ -1,9 +1,9 @@
 <?php
 
-use Core\Router;
+use Core\Render;
 ?>
 
-<?php Router::component('head-open.php') ?>
+<?php Render::component('head-open.php') ?>
 
 <figure class="h-screen flex flex-col justify-center items-center gap-[6.4rem]">
   <div>
@@ -16,4 +16,4 @@ use Core\Router;
   </div>
 </figure>
 
-<?php Router::component('head-close.php') ?>
+<?php Render::component('head-close.php') ?>

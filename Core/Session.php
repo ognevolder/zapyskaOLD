@@ -150,9 +150,17 @@ class Session
    */
   public function flashMessage(string $key)
   {
-    $message = static::getValue('_flash', $key);
+    return static::getValue('_flash', $key);
+  }
+
+  /**
+   * Clear a [_flash]
+   *
+   * @return void
+   */
+  public function clearFlashMessage(): void
+  {
     static::removeValue('_flash');
-    return $message;
   }
 
   /**

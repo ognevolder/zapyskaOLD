@@ -1,5 +1,5 @@
 <?php
 
-use Core\Router;
+use Core\Render;
 
-Router::view('profile');
+Render::view('profile');

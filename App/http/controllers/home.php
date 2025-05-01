@@ -4,7 +4,7 @@ use App\models\AuthorRepository;
 use App\models\PostRepository;
 use Core\App;
 use Core\Paginator;
-use Core\Router;
+use Core\Render;
 
 // Connect to service container
 $container = App::getContainer();
@@ -25,7 +25,7 @@ $paginator = new Paginator($page, $perPage, $totalPosts);
 $posts = $postRepo->paginate($paginator->perPage, $paginator->offset());
 $authors = $authorRepo->getAllAuthorsById();
 
-Router::view('home', [
+Render::view('home', [
   'posts' => $posts,
   'authors' => $authors,
   'paginator' => $paginator

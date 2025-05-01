@@ -1,5 +1,5 @@
 <?php
 
-use Core\Router;
+use Core\Render;
 
-Router::view('login');
+Render::view('login');

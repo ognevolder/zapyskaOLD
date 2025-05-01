@@ -1,8 +1,8 @@
 <?php
 
-use Core\Router;
+use Core\Render;
 
-Router::components([
+Render::components([
   'head-open',
   'navbar',
   'hero',
