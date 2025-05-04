@@ -1,5 +1,3 @@
 <?php
 
-use Core\Render;
-
-Render::view('profile');
+echo 'Profile page';

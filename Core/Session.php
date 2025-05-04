@@ -36,7 +36,7 @@ class Session
    */
   public static function setValue(string $firstKey, mixed $value, ?string $secondKey = null): void
   {
-    if (empty($secondKey))
+    if (!isset($secondKey))
     {
       $_SESSION[$firstKey] = $value;
     } else {
@@ -55,13 +55,13 @@ class Session
    * @param string $secondKey
    * @param $default
    */
-  public static function getValue(string $firstKey, ?string $secondKey)
+  public static function getValue(string $firstKey, ?string $secondKey = null): mixed
   {
-    if (empty($secondKey))
+    if (!isset($secondKey))
     {
-      return $_SESSION[$firstKey];
+      return $_SESSION[$firstKey] ?? null;
     } else {
-      return $_SESSION[$firstKey][$secondKey];
+      return $_SESSION[$firstKey][$secondKey] ?? null;
     }
   }
 

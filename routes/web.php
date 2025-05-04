@@ -3,9 +3,12 @@
 // Home page
 $router->get('/', 'home.php');
 
-// Login && Profile
-$router->get('/login', 'login.php');
+// Login
+$router->get('/login', 'session/create.php');
+$router->post('/login', 'session/store.php');
+
+// Profile
 $router->get('/profile', 'profile.php');
 
 // Registration
-$router->get('/registration', 'registration.php');
+$router->get('/registration', 'user/create.php');

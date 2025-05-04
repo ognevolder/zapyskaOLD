@@ -15,32 +15,41 @@ class Render
    */
   protected static function securePath(string $path, string $baseDir): string
   {
-      // Видаляємо небезпечні символи
-      $path = str_replace(['../', './', '..\\', '.\\'], '', $path);
-      $fileName = basename($path);
-  
-      // Формуємо повний шлях
-      $fullPath = rtrim($baseDir, '/') . '/' . $fileName;
-  
-      // Отримуємо реальний фізичний шлях
-      $realPath = realpath($fullPath);
-  
-      // Перевіряємо, чи файл дійсно знаходиться всередині дозволеної папки
-      if ($realPath === false || strpos($realPath, realpath($baseDir)) !== 0) {
-          throw new Exception("Access denied to file [{$path}].");
-      }
-  
-      return $realPath;
-  }
+    // 1. Нормалізація шляху: прибираємо небезпечні конструкції
+    $path = str_replace(['..\\', '../', './', '.\\'], '', $path);
+    $path = ltrim($path, '/\\'); // захист від абсолютних шляхів
+
+    // 2. Формуємо повний шлях до файлу
+    $fullPath = rtrim($baseDir, '/\\') . DIRECTORY_SEPARATOR . $path;
+
+    // 3. Отримуємо реальний абсолютний шлях
+    $realBase = realpath($baseDir);
+    $realPath = realpath($fullPath);
+
+    // 4. Перевірка безпеки:
+    if ($realPath === false || strpos($realPath, $realBase) !== 0) {
+        throw new \Exception("Access denied to file [{$path}].");
+    }
+
+    return $realPath;
+}
 
   /**
   * Нормалізує ім’я файлу та додає відповідне розширення.
   */
   protected static function normalizeFileName(string $name, string $extension): string
   {
-    $safeName = basename($name); // Видаляє шляхи
-    $cleanName = preg_replace('/(\.php|\.template\.php|\.view\.php)$/', '', $safeName);
-    return $cleanName . $extension;
+    // Розділяємо шлях на частини
+    $parts = explode('/', $name);
+    $last = array_pop($parts);
+
+    // Очищаємо тільки останню частину (файл)
+    $cleanLast = preg_replace('/(\.php|\.template\.php|\.view\.php)$/', '', $last);
+
+    // Склеюємо назад
+    $normalized = implode('/', $parts) . '/' . $cleanLast . $extension;
+
+    return ltrim($normalized, '/');
   }
 
   protected static function handleRender(string $fileName, string $baseDir, array $data = []): void
