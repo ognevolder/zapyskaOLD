@@ -12,3 +12,4 @@ $router->get('/profile', 'profile.php');
 
 // Registration
 $router->get('/registration', 'user/create.php');
+$router->post('/registration', 'user/store.php');

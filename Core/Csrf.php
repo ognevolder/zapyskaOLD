@@ -17,11 +17,15 @@ class Csrf
   public static function insertToken(): void
   {
     $token = self::generateToken();
-    echo '<input type="hidden" name="_csrf" value="' . htmlspecialchars($token, ENT_QUOTES, 'UTF-8') . '">';
+    echo '<input type="hidden" name="_csrf_token" value="' . htmlspecialchars($token, ENT_QUOTES, 'UTF-8') . '">';
   }
 
   public static function validateToken(string $token): bool
   {
+    if (!isset($token))
+    {
+      return false;
+    }
     return Session::hasValue('_csrf_token') && hash_equals(Session::getValue('_csrf_token'), $token);
   }
 

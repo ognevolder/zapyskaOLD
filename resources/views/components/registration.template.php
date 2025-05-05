@@ -8,42 +8,47 @@
   </div>
 
   <form class="w-[50%] flex flex-col gap-[2.4rem] items-start text-[2.4rem] font-thin text-[#A69281]" method="POST">
+    <!-- Hidden input with CSRF-token -->
+    <?php \Core\Csrf::insertToken(); ?>
+
     <div class="w-[100%] flex flex-col gap-[0.8rem]">
       <label class="text-[1.6rem] font-thin text-[#A69281] leading-none" for="name">Введіть імʼя (Прізвище - за вибором):</label>
-      <input 
-      class="h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]" 
-      id="name" 
-      type="text" 
+      <input
+      class="h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]"
+      id="name"
+      name="user_name"
+      value="";
+      type="text"
       placeholder="Імʼя (Прізвище)">
     </div>
 
     <div class="w-[100%] flex flex-col gap-[0.8rem]">
-      <label class="text-[1.6rem] font-thin text-[#A69281] leading-none" for="password">Введіть пароль (Мінімум 6 символів):</label>
-      <input 
-      class="h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]" 
-      id="password" 
-      type="text" 
+      <label
+      class="text-[1.6rem] font-thin text-[#A69281] leading-none"
+      for="password">Введіть пароль (Мінімум 6 символів):
+      </label>
+      <input
+      class="h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]"
+      id="password"
+      name="user_password"
+      type="password"
       placeholder="Пароль">
     </div>
 
     <div class="w-[100%] flex flex-col gap-[0.8rem]">
-      <label class="text-[1.6rem] font-thin text-[#A69281] leading-none" for="login">Введіть логін (Використовуватиметься для авторизації):</label>
-      <input 
-      class="h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]" 
-      id="login" 
-      type="text" 
+      <label
+      class="text-[1.6rem] font-thin text-[#A69281] leading-none"
+      for="login">Введіть логін (Для авторизації):
+      </label>
+      <input
+      class="h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]"
+      id="login"
+      name="user_login"
+      value=""
+      type="text"
       placeholder="Логін">
     </div>
 
-    <div class="w-[100%] flex flex-col gap-[0.8rem]">
-      <label class="text-[1.6rem] font-thin text-[#A69281] leading-none" for="role">Ваша посада (Головна редакторка, Адміністратор тощо):</label>
-      <input 
-      class="h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]" 
-      id="role" 
-      type="text" 
-      placeholder="Посада">
-    </div>
-    
     <div>
       <button class="py-[0.8rem] px-[1.6rem] bg-[#A69281] font-normal text-[2.4rem] text-[#FFFDF7]" type="submit">СТВОРИТИ</button>
     </div>

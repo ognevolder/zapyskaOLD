@@ -4,60 +4,27 @@ namespace Core;
 
 class Validator
 {
-  protected array $errors = [];
-
   /**
-   * Register $message into [errors] from corresponding $field
+   * Implements require-logic to posted $field
    *
    * @param string $field
-   * @param string $message
-   * @return void
+   * @return bool
    */
-  private function addError(string $field, string $message): void
+  public static function required(string $field): bool
   {
-    $this->errors[$field][] = $message;
+    return (!empty(trim($field)));
   }
 
   /**
-   * Get the errors from [errors]
+   * Check text length and compare to $min and $max
    *
-   * @return array
-   */
-  public function getErrors(): array
-  {
-    return $this->errors;
-  }
-
-  /**
-   * Return (bool) about error existence in [errors]
-   *
+   * @param string $field
+   * @param int $min
+   * @param int $max
    * @return boolean
    */
-  public function hasErrors(): bool
+  public static function length(string $field, int $min = 6, int $max = INF): bool
   {
-    return !empty($this->errors);
-  }
-  
-  /**
-   * Implements require-logic to posted $value for corresponding $field
-   *
-   * @param string $field
-   * @param string $value
-   * @return void
-   */
-  public function required(string $field, string $value): void
-  {
-    if (empty($value))
-    {
-      $this->addError($field, "Поле {$field} є обовʼязковим!");
-    }
-  }
-
-  // Функція для перевірки мінімальної довжини
-  public function minLength($field, $value, $min)
-  {
-      if (strlen($value) < $min) {
-          $this->addError($field, "Поле $field повинно містити хоча б $min символів");
-      }
+    return (strlen($field) >= $min && strlen($field) <= $max);
   }
 }

@@ -22,7 +22,7 @@ class Database
     try
     {
       $this->connection = new PDO($dsn, $config['user'], $config['password'], $this->options);
-      
+
     } catch (PDOException $e)
     {
       echo "Database connection failed: {$e->getMessage()}.";
@@ -39,5 +39,17 @@ class Database
     $this->statement = $this->connection->prepare($query);
     $this->statement->execute($params);
     return $this->statement;
+  }
+
+  /**
+   * Check uniqality of given $data in DB $column
+   *
+   * @param string $field
+   * @param string $column
+   * @return boolean
+   */
+  public function hasValue(string $field, string $column): bool
+  {
+
   }
 }

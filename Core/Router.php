@@ -6,7 +6,7 @@ namespace Core;
 class Router
 {
   protected $routes = [];
-  
+
   /**
    * Register a new route with $uri, $method and corresponding $controller
    *
@@ -52,9 +52,9 @@ class Router
 
   public function route(string $uri, string $method)
   {
-    foreach ($this->routes as $route) 
+    foreach ($this->routes as $route)
     {
-      if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) 
+      if ($route['uri'] === $uri && $route['method'] === strtoupper($method))
       {
         require BASE_PATH . "App/http/controllers/{$route['controller']}";
         return;
@@ -66,5 +66,10 @@ class Router
   protected function abort($code = 404)
   {
     Response::send($code);
+  }
+
+  public function redirect(string $path): void
+  {
+    header('Location: ' . $path, true, 302);
   }
 }

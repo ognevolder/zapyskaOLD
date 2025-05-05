@@ -12,15 +12,15 @@ class Response
    * @param int $code
    * @return void
    */
-  public static function send(int $code): void
+  public static function send(int $code = 404): void
   {
     if (headers_sent()) {
       // Вже пізно змінювати заголовки, покажи стандартну помилку
       echo "<h1>Error {$code}</h1><p>Headers already sent. Cannot change response code.</p>";
       exit();
     }
-    
-    http_response_code($code = 404);
+
+    http_response_code($code);
     $fullPath = BASE_PATH . "resources/views/response/{$code}.php";
 
     try

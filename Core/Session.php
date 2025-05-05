@@ -40,7 +40,7 @@ class Session
     {
       $_SESSION[$firstKey] = $value;
     } else {
-      if (!isset($_SESSION[$firstKey]) || !is_array($_SESSION[$firstKey])) 
+      if (!isset($_SESSION[$firstKey]) || !is_array($_SESSION[$firstKey]))
       {
         $_SESSION[$firstKey] = []; // якщо ще не масив — створюємо
       }
@@ -107,8 +107,8 @@ class Session
 
         setcookie(
             session_name(),
-            '',       
-            time() - 42000, 
+            '',
+            time() - 42000,
             $params["path"],
             $params["domain"],
             $params["secure"],
@@ -116,10 +116,10 @@ class Session
         );
     }
 
-    // Destroy session on server
+    // Destroy Session on server
     session_destroy();
 
-    // Close sessopn
+    // Close Session
     session_write_close();
 
     // Start a new Session with new ID
@@ -142,13 +142,13 @@ class Session
   {
     static::setValue('_flash', $value, $key);
   }
-  
+
   /**
    * Get a flash-message with corresponding $key from Session
    *
    * @param string $key
    */
-  public function flashMessage(string $key)
+  public function getFlashMessage(string $key)
   {
     return static::getValue('_flash', $key);
   }
@@ -183,7 +183,7 @@ class Session
   {
     return static::getValue('old', $key) ?? null;
   }
-  
+
   /**
    * Clear all data from Session[old]
    *
