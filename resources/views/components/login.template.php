@@ -7,25 +7,32 @@
     <p class="font-extralight text-[#BFBA73] text-[3.2rem] leading-none">АВТОРИЗАЦІЯ</p>
   </div>
 
-  <form 
-  class="flex flex-col gap-[1.6rem] items-center text-[2.4rem] font-thin text-[#BFBA73]" 
+  <form
+  class="flex flex-col gap-[1.6rem] items-center text-[2.4rem] font-thin text-[#BFBA73]"
   method="POST"
   action="/login"
   >
     <!-- Hidden input with CSRF-token -->
     <?php \Core\Csrf::insertToken(); ?>
-  
-    <input 
-    class="w-[36rem] h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]"
-    name="login" 
-    type="text"
-    placeholder="Логін">
 
-    <input 
+    <input
     class="w-[36rem] h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]"
-    name="password"
-    type="password" 
+    name="user_login"
+    type="text"
+    value="<?= $old['user_login'] ?? '' ?>"
+    placeholder="Логін">
+    <?php if (isset($errors['user_login'])) : ?>
+      <p><?= $errors['user_login'] ?></p>
+    <?php endif; ?>
+
+    <input
+    class="w-[36rem] h-[4.8rem] py-[0.8rem] px-[1.6rem] bg-white border border-[#BFBA73]"
+    name="user_password"
+    type="password"
     placeholder="Пароль">
+    <?php if (isset($errors['user_password'])) : ?>
+      <p><?= $errors['user_password'] ?></p>
+    <?php endif; ?>
 
     <div>
       <button class="py-[0.8rem] px-[1.6rem] bg-[#BFBA73] font-normal text-[2.4rem] text-[#FFFDF7]">ВХІД</button>

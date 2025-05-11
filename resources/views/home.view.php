@@ -2,9 +2,11 @@
 
 use Core\Render;
 
+$user = $session::getValue('user');
+
 Render::components([
   'head-open',
-  'navbar',
+  ['navbar' => ['user' => $user]],
   'hero',
   'divider',
   ['post-grid' => ['posts' => $posts, 'authors' => $authors]],

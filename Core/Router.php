@@ -101,16 +101,16 @@ class Router
     Response::send($code);
   }
 
-  public function redirect(string $path): void
+  public static function redirect(string $path): void
   {
     header('Location: ' . $path, true, 302);
     exit();
   }
 
   // Redirect to a previous page
-  public function redirectBack(): void
+  public static function redirectBack(): void
   {
     $referer = $_SERVER['HTTP_REFERER'] ?? '/';
-    $this->redirect($referer);
+    static::redirect($referer);
   }
 }

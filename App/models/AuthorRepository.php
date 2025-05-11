@@ -4,6 +4,7 @@ namespace App\models;
 
 use Core\Database;
 use PDO;
+use Faker\Factory as FakerFactory;
 
 class AuthorRepository
 {
@@ -16,7 +17,7 @@ class AuthorRepository
 
   /**
    * Fetch all users, binded to theirs id
-   * 
+   *
    * @return array
    */
   public function getAllAuthorsById(): array
@@ -33,5 +34,28 @@ class AuthorRepository
   {
     return $authors[$post['author_id']] ?? null;
   }
-  
+
+  /**
+   * Creating a random post for DB
+   *
+   * @return void
+   */
+  public function seedRandomAuthors(int $count = 1): void
+  {
+    $faker = FakerFactory::create('uk_UA');
+
+    $sql = "INSERT INTO authors (name, role, password, login_name, admin) VALUES (:name, :role, :password, :login_name, :admin)";
+    $stmt = $this->pdo->prepare($sql);
+
+    for ($i = 0; $i < $count; $i++)
+    {
+      $stmt->execute([
+        ':name' => $faker->name(),
+        ':role' => $faker->jobTitle(),
+        ':password' => password_hash('123456', PASSWORD_BCRYPT),
+        ':login_name' => $faker->word(),
+        ':admin' => rand(0, 1)
+      ]);
+    }
+  }
 }

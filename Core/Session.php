@@ -140,7 +140,7 @@ class Session
    */
   public function setFlashMessage(mixed $value, string $key): void
   {
-    $_SESSION['_flash'][$key][] = $value;
+    $_SESSION['_flash'][$key] = $value;
   }
 
   /**
@@ -148,11 +148,11 @@ class Session
    *
    * @param string $key
    */
-  public function getFlashMessage(string $firstKey, ?string $secondKey = null): mixed
+  public function getFlashMessage(string $firstKey, ?string $secondKey = null)
   {
     if (!isset($secondKey))
     {
-      return $_SESSION['_flash'][$firstKey];
+      return $_SESSION['_flash'][$firstKey] ?? null;
     }
     return $_SESSION['_flash'][$firstKey][$secondKey] ?? null;
   }

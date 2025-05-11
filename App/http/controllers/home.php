@@ -5,9 +5,14 @@ use App\models\PostRepository;
 use Core\App;
 use Core\Paginator;
 use Core\Render;
+use Core\Session;
+
+// Session instance
+$session = App::getContainer()->resolve(Session::class);
 
 // Connect to service container
 $container = App::getContainer();
+
 
 // Create DB instance and resolve Repositories
 $authorRepo = $container->resolve(AuthorRepository::class);
@@ -28,5 +33,6 @@ $authors = $authorRepo->getAllAuthorsById();
 Render::view('home', [
   'posts' => $posts,
   'authors' => $authors,
-  'paginator' => $paginator
+  'paginator' => $paginator,
+  'session' => $session
 ]);

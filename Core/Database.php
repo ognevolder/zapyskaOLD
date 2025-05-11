@@ -41,15 +41,5 @@ class Database
     return $this->statement;
   }
 
-  /**
-   * Check uniqality of given $data in DB $column
-   *
-   * @param string $field
-   * @param string $column
-   * @return boolean
-   */
-  public function hasValue(string $field, string $column): bool
-  {
 
-  }
 }

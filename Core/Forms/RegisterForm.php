@@ -5,7 +5,7 @@ namespace Core\Forms;
 use Core\Validator;
 use Core\ValidatorException;
 
-class RegisterForm
+class RegisterForm implements Form
 {
   protected array $errors = [];
 
@@ -14,10 +14,10 @@ class RegisterForm
     // Checking a REQUIRE rule
     foreach ($attributes as $field => $value)
     {
-        if (!Validator::required($value))
-        {
-            $this->errors[$field] = "Поле є обовʼязковим";
-        }
+      if (!Validator::required($value))
+      {
+        $this->errors[$field] = "Поле є обовʼязковим";
+      }
     }
   }
 
@@ -34,7 +34,7 @@ class RegisterForm
     // Перевіряє наявність errors та викидає ValidatorException
     if ($instance->failed())
     {
-        $instance->throw();
+      $instance->throw();
     }
     return $instance;
   }

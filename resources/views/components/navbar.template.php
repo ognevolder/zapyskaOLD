@@ -3,5 +3,5 @@
   <a class="hover:text-[#025939] focus:text-[#025939]" href="/posts">Публікації</a>
   <a class="hover:text-[#025939] focus:text-[#025939]" href="/stories">Історії</a>
   <a class="hover:text-[#025939] focus:text-[#025939]" href="/art">Творчість</a>
-  <a class="hover:text-[#025939] focus:text-[#025939]" href="/profile">Профіль</a>
+  <a class="hover:text-[#025939] focus:text-[#025939]" href="/profile"><?= $user['name'] ?? 'Профіль' ?></a>
 </nav>
