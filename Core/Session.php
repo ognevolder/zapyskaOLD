@@ -140,7 +140,7 @@ class Session
    */
   public function setFlashMessage(mixed $value, string $key): void
   {
-    static::setValue('_flash', $value, $key);
+    $_SESSION['_flash'][$key][] = $value;
   }
 
   /**
@@ -148,9 +148,13 @@ class Session
    *
    * @param string $key
    */
-  public function getFlashMessage(string $key)
+  public function getFlashMessage(string $firstKey, ?string $secondKey = null): mixed
   {
-    return static::getValue('_flash', $key);
+    if (!isset($secondKey))
+    {
+      return $_SESSION['_flash'][$firstKey];
+    }
+    return $_SESSION['_flash'][$firstKey][$secondKey] ?? null;
   }
 
   /**

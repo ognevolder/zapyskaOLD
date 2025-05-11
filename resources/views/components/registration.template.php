@@ -20,6 +20,7 @@
       value="";
       type="text"
       placeholder="Імʼя (Прізвище)">
+      <p><?= $session->getFlashMessage('errors', 'user_name') ?></p>
     </div>
 
     <div class="w-[100%] flex flex-col gap-[0.8rem]">
@@ -33,6 +34,7 @@
       name="user_password"
       type="password"
       placeholder="Пароль">
+      <p><?= $session->getFlashMessage('errors', 'user_password') ?></p>
     </div>
 
     <div class="w-[100%] flex flex-col gap-[0.8rem]">
@@ -47,6 +49,7 @@
       value=""
       type="text"
       placeholder="Логін">
+      <p><?= $session->getFlashMessage('errors', 'user_login') ?></p>
     </div>
 
     <div>

@@ -1,9 +1,9 @@
 <?php
 
 use Core\App;
+use Core\Container;
 use Core\Router;
 use Core\Session;
-use Core\ValidatorException;
 
 const BASE_PATH = __DIR__.'/../';
 require BASE_PATH . 'vendor/autoload.php';
@@ -13,24 +13,14 @@ App::requestAll([
   'seeder.php'
 ]);
 
-$session = new Session;
+// Session
+$session = App::getContainer()->resolve(Session::class);
+// Router
+$router = App::getContainer()->resolve(Router::class);
 
-$router = new Router;
-require BASE_PATH . 'routes/web.php';
+// Clear flash-messages
+$session->clearFlashMessage();
 
-$uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-$method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
-
-try
-{
-  $router->route($uri, $method);
-}
-catch (ValidatorException $exception)
-{
-  $session->setFlashMessage($exception->errors, 'errors');
-  $session->setOldData($exception->old, 'old');
-  $router->redirect($_SERVER['HTTP_REFERER']);
-}
 
 
 

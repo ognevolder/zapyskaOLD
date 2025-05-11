@@ -4,6 +4,6 @@ use Core\Render;
 
 Render::components([
   'head-open',
-  'registration',
+  ['registration' => ['session' => $session]],
   'head-close'
 ]);
