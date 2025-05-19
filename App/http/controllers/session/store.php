@@ -60,5 +60,4 @@ if (!$user || !password_verify($password, $user['password'])) {
   Router::redirect('/');
 }
 
-App::inspect($_SESSION);
 

@@ -22,7 +22,7 @@
     value="<?= $old['user_login'] ?? '' ?>"
     placeholder="Логін">
     <?php if (isset($errors['user_login'])) : ?>
-      <p><?= $errors['user_login'] ?></p>
+      <p class="text-[#c55c55] text-[1.8rem] font-bold"><?= $errors['user_login'] ?></p>
     <?php endif; ?>
 
     <input
@@ -31,7 +31,7 @@
     type="password"
     placeholder="Пароль">
     <?php if (isset($errors['user_password'])) : ?>
-      <p><?= $errors['user_password'] ?></p>
+      <p class="text-[#c55c55] text-[1.8rem] font-bold"><?= $errors['user_password'] ?></p>
     <?php endif; ?>
 
     <div>

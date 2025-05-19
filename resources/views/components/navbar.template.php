@@ -1,7 +1,9 @@
-<nav class="mt-[6.4rem] py-[1.6rem] border-[1px] border-transparent border-y-[#BFBA73] flex gap-[24px] justify-center font-[Nunito] uppercase text-[32px] font-[200] text-[#BFBA73]">
-  <a class="hover:text-[#025939] focus:text-[#025939]" href="/">Головна</a>
-  <a class="hover:text-[#025939] focus:text-[#025939]" href="/posts">Публікації</a>
-  <a class="hover:text-[#025939] focus:text-[#025939]" href="/stories">Історії</a>
-  <a class="hover:text-[#025939] focus:text-[#025939]" href="/art">Творчість</a>
-  <a class="hover:text-[#025939] focus:text-[#025939]" href="/profile"><?= $user['name'] ?? 'Профіль' ?></a>
+<nav class="mt-[6.4rem] py-[1.6rem] border-[1px] border-transparent border-y-[#BFBA73]">
+  <ul class="flex gap-[24px] justify-center font-[Nunito] font-extralight text-[#BFBA73] text-[3.2rem] uppercase">
+    <li class="hover:text-[#025939] active:text-[#025939]"><a href="/">Головна</a></li>
+    <li class="hover:text-[#025939] active:text-[#025939]"><a href="/posts">Публікації</a></li>
+    <li class="hover:text-[#025939] active:text-[#025939]"><a href="/stories">Історії</a></li>
+    <li class="hover:text-[#025939] active:text-[#025939]"><a href="/art">Творчість</a></li>
+    <li class="hover:text-[#025939] active:text-[#025939]"><a href="<?= $user['login'] ?? '/login'?>"><?= $user['name'] ?? 'Профіль' ?></a></li>
+  </ul>
 </nav>

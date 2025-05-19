@@ -1,7 +1,6 @@
 <?php
 
 use Core\App;
-use Core\Container;
 use Core\Router;
 use Core\Session;
 
@@ -17,7 +16,6 @@ App::requestAll([
 $session = App::getContainer()->resolve(Session::class);
 // Router
 $router = App::getContainer()->resolve(Router::class);
-
 // Clear flash-messages
 $session->clearFlashMessage();
 
