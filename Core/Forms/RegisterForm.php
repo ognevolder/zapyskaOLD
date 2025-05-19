@@ -44,23 +44,31 @@ class RegisterForm
     // Checking given [data] with rules
     foreach ($this->data as $field => $value)
     {
+      // Check PASSWORD
+      if ($field == 'user_password')
+      {
+        $user_password = $this->data['user_password'];
+        if (Validator::required($user_password) && !Validator::password($user_password, 6, 24))
+        {
+          $this->errors['user_password'] = 'Пароль повинен містити мінімум 6 символів';
+        }
+      }
+
+      // Check UNIQUENESS
+      if ($field == 'user_login')
+      {
+        $user_login = $this->data['user_login'];
+        if (Validator::required($user_password) && !Validator::uniqueness($user_login))
+        {
+          $this->errors['user_login'] = "Користувацький логін {$user_login} вже зареєстровано";
+        }
+      }
+
       // Check REQUIRE
       if (!Validator::required($value))
       {
         $this->errors[$field] = 'Поле є обовʼязковим';
       }
-    }
-    // Check PASSWORD
-    $user_password = $this->data['user_password'];
-    if (Validator::required($user_password) && !Validator::password($user_password, 6, 24))
-    {
-      $this->errors['user_password'] = 'Пароль повинен містити мінімум 6 символів';
-    }
-    // Check UNIQUENESS
-    $user_login = $this->data['user_login'];
-    if (Validator::required($user_password) && !Validator::uniqueness($user_login))
-    {
-      $this->errors['user_login'] = "Користувацький логін {$user_login} вже зареєстровано";
     }
     // Throwing [errors]
     if (!empty($this->errors))
