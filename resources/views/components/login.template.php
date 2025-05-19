@@ -37,6 +37,9 @@
     <div>
       <button class="py-[0.8rem] px-[1.6rem] bg-[#BFBA73] font-normal text-[2.4rem] text-[#FFFDF7]">ВХІД</button>
     </div>
+    <?php if (isset($errors['auth'])) : ?>
+      <p class="text-[#c55c55] text-[1.8rem] font-bold"><?= $errors['auth'] ?></p>
+    <?php endif; ?>
   </form>
 
   <div class="flex gap-[0.8rem] text-[1.6rem] text-[#BFBA73] font-light">
