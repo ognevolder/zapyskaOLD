@@ -6,9 +6,9 @@
         <a href="#"><span class="font-normal text-[#BFBA73]">#<?= $post['tag'] ?></span></a>
         <span class="font-light text-[#BFBFBF]"><?= date_format(date_create($post['date']), "Y/m/d - H:i") ?></span>
       </div>
-  
+
       <!-- Заголовок і тіло -->
-      <a href="#">
+      <a href="/posts/<?= $post['id'] ?>">
         <div class="flex flex-col gap-[0.8rem] text-[#262626] overflow-hidden">
           <h2 class="text-[3.6rem] font-bold leading-[4.2rem] break-words line-clamp-[2]">
             <?= $post['title'] ?>
@@ -18,10 +18,10 @@
           </p>
         </div>
       </a>
-      
+
       <!-- Автор -->
       <div class="flex gap-[0.8rem] text-[1.8rem]">
-        <a href="#"><span class="font-semibold text-[#025939]"><?= \App\models\AuthorRepository::getAuthorOfPost($post, $authors)['name'] ?></span></a>
+        <a href="/<?= \App\models\AuthorRepository::getAuthorOfPost($post, $authors)['login_name'] ?>"><span class="font-semibold text-[#025939]"><?= \App\models\AuthorRepository::getAuthorOfPost($post, $authors)['name'] ?></span></a>
         <span class="font-light text-[#BFBFBF]"><?= \App\models\AuthorRepository::getAuthorOfPost($post, $authors)['role'] ?></span>
       </div>
   </figure>

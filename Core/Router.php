@@ -2,6 +2,9 @@
 
 namespace Core;
 
+use Core\Middleware\AdminMiddleware;
+use Core\Middleware\AuthMiddleware;
+use Core\Middleware\GuestMiddleware;
 
 class Router
 {
@@ -11,6 +14,7 @@ class Router
   protected array $middlewares = [];
   protected ?string $uri;
   protected ?string $method;
+  protected array $params = [];
 
   /**
    * Initiate a Router body and require a routes
@@ -23,18 +27,12 @@ class Router
     // Автоматичне зчитування URI та HTTP-методу
     $this->uri = parse_url($_SERVER['REQUEST_URI'])['path'] ?? '/';
     $this->method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
+  }
 
-    // Підключення маршрутів
+  public function loadRoutes(): void
+  {
+    $router = $this;
     require BASE_PATH . 'routes/web.php';
-
-    // Автоматичний запуск маршрутизації
-    try {
-        $this->route($this->uri, $this->method);
-    } catch (ValidatorException $e) {
-        $this->session->setFlashMessage($e->errors, 'errors');
-        $this->session->setOldData($e->old, 'old');
-        $this->redirectBack();
-    }
   }
 
   /**
@@ -50,7 +48,8 @@ class Router
       $this->routes[] = [
         'uri' => $uri,
         'method' => $method,
-        'controller' => $controller
+        'controller' => $controller,
+        'middleware' => []
       ];
 
       return $this;
@@ -82,23 +81,58 @@ class Router
 
   public function route()
   {
-    $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
-    $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
+    foreach ($this->routes as $route) {
+        $pattern = preg_replace('#\{([^}]+)\}#', '([^/]+)', $route['uri']);
+        $pattern = "#^" . $pattern . "$#";
 
-    foreach ($this->routes as $route)
-    {
-      if ($route['uri'] === $uri && $route['method'] === strtoupper($method))
-      {
-        require BASE_PATH . "App/http/controllers/{$route['controller']}";
-        return;
-      }
+        if (preg_match($pattern, $this->uri, $matches) && $route['method'] === $this->method) {
+            array_shift($matches); // Видаляємо повний збіг
+
+            // Зберігаємо параметри
+            preg_match_all('#\{([^}]+)\}#', $route['uri'], $paramNames);
+            $this->params = array_combine($paramNames[1], $matches);
+
+            // Middleware
+            foreach ($route['middleware'] as $mw) {
+                $this->resolveMiddleware($mw);
+            }
+
+            require BASE_PATH . "App/http/controllers/{$route['controller']}";
+            return;
+        }
     }
+
     $this->abort();
   }
 
   protected function abort($code = 404)
   {
     Response::send($code);
+  }
+
+  protected function resolveMiddleware(string $middleware)
+  {
+    $middlewareClass = match ($middleware) {
+        'auth' => AuthMiddleware::class,
+        'guest' => GuestMiddleware::class,
+        'admin' => AdminMiddleware::class,
+        default => throw new \Exception("Middleware '{$middleware}' not found.")
+    };
+
+    (new $middlewareClass)->handle();
+  }
+
+  public function middleware(array $middlewares)
+  {
+    $lastKey = array_key_last($this->routes);
+    $this->routes[$lastKey]['middleware'] = $middlewares;
+
+    return $this;
+  }
+
+  public function only(string $middleware)
+  {
+    return $this->middleware([$middleware]);
   }
 
   public static function redirect(string $path): void
@@ -112,5 +146,15 @@ class Router
   {
     $referer = $_SERVER['HTTP_REFERER'] ?? '/';
     static::redirect($referer);
+  }
+
+  public static function param(string $key): ?string
+  {
+    return App::getContainer()->resolve(Router::class)->params[$key] ?? null;
+  }
+
+  public static function params(): array
+  {
+    return App::getContainer()->resolve(Router::class)->params;
   }
 }

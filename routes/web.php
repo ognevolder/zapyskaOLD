@@ -1,15 +1,22 @@
 <?php
 
-// Home page
-$this->get('/', 'home.php');
+// Home
+$router->get('/', 'home.php');
+
+// Post
+$router->get('/posts/{id}', 'posts/show.php');
 
 // Login
-$this->get('/login', 'session/create.php');
-$this->post('/login', 'session/store.php');
+$router->get('/login', 'session/create.php');
+$router->post('/login', 'session/store.php');
 
 // Profile
-$this->get('/profile', 'profile.php');
+$router->get('/profile', 'profile.php');
+$router->get('/{login}', 'user/show.php');
 
 // Registration
-$this->get('/registration', 'user/create.php');
-$this->post('/registration', 'user/store.php');
+$router->get('/registration', 'user/create.php');
+$router->post('/registration', 'user/store.php');
+
+// Admin panel
+$router->get('/admin', 'admin.php');
