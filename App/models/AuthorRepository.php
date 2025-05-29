@@ -30,10 +30,32 @@ class AuthorRepository
     return array_column($authors, null, 'id');
   }
 
+  /**
+   * Returns a
+   *
+   * @param array $post
+   * @param array $authors
+   */
   public static function getAuthorOfPost(array $post, array $authors)
   {
     return $authors[$post['author_id']] ?? null;
   }
+
+  /**
+   * Fetch author with $login
+   *
+   * @param string $login
+   * @return array
+   */
+  public function fetchByLogin($login)
+  {
+    $sql = "SELECT * FROM authors WHERE login_name = :login";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['login' => $login]);
+
+    return $stmt->fetch();
+  }
+
 
   /**
    * Creating a random post for DB

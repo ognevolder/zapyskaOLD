@@ -58,25 +58,25 @@ class Router
   // Register a GET request
   public function get(string $uri, string $controller)
   {
-    $this->add($uri, 'GET', $controller);
+    return $this->add($uri, 'GET', $controller);
   }
 
   // Register a POST request
   public function post(string $uri, string $controller)
   {
-    $this->add($uri, 'POST', $controller);
+    return $this->add($uri, 'POST', $controller);
   }
 
   // Register a PATCH request
   public function patch(string $uri, string $controller)
   {
-    $this->add($uri, 'PATCH', $controller);
+    return $this->add($uri, 'PATCH', $controller);
   }
 
   // Register a DELETE request
   public function delete(string $uri, string $controller)
   {
-    $this->add($uri, 'DELETE', $controller);
+    return $this->add($uri, 'DELETE', $controller);
   }
 
   public function route()
@@ -119,7 +119,9 @@ class Router
         default => throw new \Exception("Middleware '{$middleware}' not found.")
     };
 
-    (new $middlewareClass)->handle();
+    // Передаємо session
+    $middlewareInstance = new $middlewareClass($this->session);
+    $middlewareInstance->handle();
   }
 
   public function middleware(array $middlewares)
@@ -130,9 +132,9 @@ class Router
     return $this;
   }
 
-  public function only(string $middleware)
+  public function only(string ...$middlewares)
   {
-    return $this->middleware([$middleware]);
+    return $this->middleware($middlewares);
   }
 
   public static function redirect(string $path): void

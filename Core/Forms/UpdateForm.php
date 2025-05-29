@@ -9,16 +9,16 @@ use Core\Session;
 use Core\Validator;
 use Core\ValidatorException;
 
-class LoginForm
+class UpdateForm
 {
   protected array $errors = [];
   protected array $data = [];
-  protected $user;
+  protected array $user = [];
   protected Session $session;
   protected Database $db;
 
   /**
-   * Create a Login Form body with [data] of given $attributes
+   * Create a Update-Form body with [data] of given $attributes
    *
    * @param array $attributes
    */
@@ -33,9 +33,9 @@ class LoginForm
     {
       $this->data[$field] = $value;
     }
+    // Return instance
     return $this;
   }
-
 
   /**
    * Validate a [data] and fill a [errors]
@@ -55,6 +55,16 @@ class LoginForm
         }
       }
 
+      // Check UNIQUENESS
+      if ($field == 'user_login')
+      {
+        $user_login = $this->data['user_login'];
+        if (!Validator::uniqueness($user_login))
+        {
+          $this->errors['user_login'] = "Користувацький логін {$user_login} вже зареєстровано";
+        }
+      }
+
       // Check REQUIRE
       if (!Validator::required($value))
       {
@@ -69,6 +79,7 @@ class LoginForm
     // Return
     return $this;
   }
+
 
   /**
    * Validate, throw, store in Session and redirect
@@ -89,19 +100,23 @@ class LoginForm
   }
 
   /**
-   * Authorising
+   * Data update
+   *
+   * @return void
    */
-  public function authorise()
+  public function update(): void
   {
     if (empty($this->errors))
     {
-      // Fetch user with login-name
       try
       {
-        $this->user = $this->db->query("SELECT * FROM authors WHERE login_name = :login",
+        $this->db->query("UPDATE authors SET name = :name, password = :password, login_name = :login WHERE id = :id",
         [
-          'login' => htmlspecialchars($this->data['user_login'])
-        ])->fetch();
+          'name' => htmlspecialchars($this->data['user_name']),
+          'password' => htmlspecialchars(password_hash($this->data['user_password'], PASSWORD_BCRYPT)),
+          'login_name' => htmlspecialchars($this->data['user_login']),
+          'id' => Session::getValue('user', 'id')
+        ]);
       }
       catch (ValidatorException $e)
       {
@@ -109,15 +124,8 @@ class LoginForm
       Router::redirectBack();
       }
     }
-
-    // Check password
-    if (!$this->user || !password_verify($this->data['user_password'], $this->user['password']))
-    {
-      $this->errors['auth'] = 'Користувача не знайдено';
-      ValidatorException::throw($this->errors, $this->data);
-    }
-    return $this;
   }
+
 
   /**
    * Create a user instance into Session
@@ -127,9 +135,8 @@ class LoginForm
   {
     // Set data into Session
     $this->session::setValue('user', [
-      'id' => $this->user['id'],
-      'name' => $this->user['name'],
-      'login' => $this->user['login_name'],
-      'admin' => (int) $this->user['admin']]);
+      'name' => $this->data['user_name'],
+      'login' => $this->data['user_login'],
+      'admin' => $this->data['admin']]);
   }
 }

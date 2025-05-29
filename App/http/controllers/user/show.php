@@ -1,8 +1,5 @@
 <?php
 
-use Core\App;
-use Core\Router;
+echo 'Public profile-page of an Author';
 
-$login = Router::param('login');
 
-App::inspect($login);

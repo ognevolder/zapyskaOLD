@@ -8,7 +8,7 @@
       </div>
 
       <!-- Заголовок і тіло -->
-      <a href="/posts/<?= $post['id'] ?>">
+      <a href="/post/<?= $post['id'] ?>">
         <div class="flex flex-col gap-[0.8rem] text-[#262626] overflow-hidden">
           <h2 class="text-[3.6rem] font-bold leading-[4.2rem] break-words line-clamp-[2]">
             <?= $post['title'] ?>

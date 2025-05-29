@@ -27,3 +27,4 @@ $container->singletone(Router::class, fn($c) => new Router(
 ));
 
 App::setContainer($container);
+

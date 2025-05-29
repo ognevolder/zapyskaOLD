@@ -2,6 +2,7 @@
 
 namespace Core\Middleware;
 
+use Core\Router;
 use Core\Session;
 
 class AuthMiddleware implements Middleware
@@ -16,8 +17,7 @@ class AuthMiddleware implements Middleware
     public function handle(): void
     {
         if (!$this->session::getValue('user')) {
-            header('Location: /login');
-            exit;
+            Router::redirect('/login');
         }
     }
 }

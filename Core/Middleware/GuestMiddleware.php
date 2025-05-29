@@ -2,6 +2,7 @@
 
 namespace Core\Middleware;
 
+use Core\Router;
 use Core\Session;
 
 class GuestMiddleware implements Middleware
@@ -16,7 +17,7 @@ class GuestMiddleware implements Middleware
     public function handle(): void
     {
         if ($this->session::getValue('user')) {
-            //
+            Router::redirect('/');
         }
     }
 }

@@ -4,6 +4,6 @@
     <li class="hover:text-[#025939] active:text-[#025939]"><a href="/posts">Публікації</a></li>
     <li class="hover:text-[#025939] active:text-[#025939]"><a href="/stories">Історії</a></li>
     <li class="hover:text-[#025939] active:text-[#025939]"><a href="/art">Творчість</a></li>
-    <li class="hover:text-[#025939] active:text-[#025939]"><a href="<?= $user['login'] ?? '/login'?>"><?= $user['name'] ?? 'Профіль' ?></a></li>
+    <li class="hover:text-[#025939] active:text-[#025939]"><a href="/profile"><?= $user['name'] ?? 'Профіль' ?></a></li>
   </ul>
 </nav>

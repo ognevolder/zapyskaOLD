@@ -108,11 +108,12 @@ class RegisterForm
     {
       try
       {
-        $this->db->query("INSERT INTO authors (name, password, login_name) VALUES (:name, :password, :login_name)",
+        $this->db->query("INSERT INTO authors (name, password, login_name, admin) VALUES (:name, :password, :login_name, :admin)",
         [
           'name' => htmlspecialchars($this->data['user_name']),
           'password' => htmlspecialchars(password_hash($this->data['user_password'], PASSWORD_BCRYPT)),
-          'login_name' => htmlspecialchars($this->data['user_login'])
+          'login_name' => htmlspecialchars($this->data['user_login']),
+          'admin' => 0
         ]);
       }
       catch (ValidatorException $e)
@@ -130,6 +131,9 @@ class RegisterForm
   public function login(): void
   {
     // Set data into Session
-    $this->session::setValue('user', ['name' => $this->data['user_name'], 'login' => $this->data['user_login']]);
+    $this->session::setValue('user', [
+      'name' => $this->data['user_name'],
+      'login' => $this->data['user_login'],
+      'admin' => $this->data['admin']]);
   }
 }

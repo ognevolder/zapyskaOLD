@@ -1,3 +1,3 @@
 <?php
 
-echo 'admin';
+echo 'admin-page';
