@@ -17,4 +17,4 @@ $authors = $authorRepo->getAllAuthorsById();
 $author = $authorRepo->getAuthorOfPost($post, $authors);
 
 // Render view
-Render::view('post', ['post' => $post, 'author' => $author]);
+Render::view('post/show', ['post' => $post, 'author' => $author]);

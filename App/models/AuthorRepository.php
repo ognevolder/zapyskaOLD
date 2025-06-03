@@ -16,6 +16,38 @@ class AuthorRepository
   }
 
   /**
+   * Returns count of all authors
+   *
+   * @return integer
+   */
+  public function countAll(): int
+  {
+    $sql = "SELECT COUNT(*) FROM authors";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute();
+
+    $count = $stmt->fetch();
+    return $count['COUNT(*)'];
+  }
+
+  /**
+   * Returns count of all authors sorted by $limit
+   *
+   * @param int $limit
+   * @return integer
+   */
+  public function count($limit): int
+  {
+    $sql = "SELECT COUNT(*) FROM authors WHERE date BETWEEN CURDATE() AND DATE_SUB(CURDATE(), INTERVAL :limit DAY)";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute(['limit' => $limit]);
+
+    $count = $stmt->fetch();
+    return $count['COUNT(*)'];
+  }
+
+
+  /**
    * Fetch all users, binded to theirs id
    *
    * @return array
@@ -66,7 +98,7 @@ class AuthorRepository
   {
     $faker = FakerFactory::create('uk_UA');
 
-    $sql = "INSERT INTO authors (name, role, password, login_name, admin) VALUES (:name, :role, :password, :login_name, :admin)";
+    $sql = "INSERT INTO authors (name, role, password, login_name, admin, date) VALUES (:name, :role, :password, :login_name, :admin, :date)";
     $stmt = $this->pdo->prepare($sql);
 
     for ($i = 0; $i < $count; $i++)
@@ -76,7 +108,8 @@ class AuthorRepository
         ':role' => $faker->jobTitle(),
         ':password' => password_hash('123456', PASSWORD_BCRYPT),
         ':login_name' => $faker->word(),
-        ':admin' => rand(0, 1)
+        ':admin' => rand(0, 1),
+        ':date' => $faker->date('2025-05-d')
       ]);
     }
   }

@@ -23,7 +23,6 @@ $router->loadRoutes();
 try {
     $router->route();
 } catch (ValidatorException $e) {
-    $session = App::getContainer()->resolve(Session::class);
     $session->setFlashMessage($e->errors, 'errors');
     $session->setOldData($e->old, 'old');
     $router->redirectBack();

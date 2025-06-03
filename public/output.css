@@ -7,6 +7,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-amber-500: oklch(76.9% 0.188 70.08);
     --color-white: #fff;
     --font-weight-thin: 100;
     --font-weight-extralight: 200;
@@ -195,6 +196,9 @@
   .mt-\[6\.4rem\] {
     margin-top: 6.4rem;
   }
+  .mb-\[1\.6rem\] {
+    margin-bottom: 1.6rem;
+  }
   .line-clamp-\[2\] {
     overflow: hidden;
     display: -webkit-box;
@@ -222,11 +226,20 @@
   .h-\[4\.8rem\] {
     height: 4.8rem;
   }
+  .h-\[16rem\] {
+    height: 16rem;
+  }
   .h-screen {
     height: 100vh;
   }
+  .w-\[16rem\] {
+    width: 16rem;
+  }
   .w-\[20\%\] {
     width: 20%;
+  }
+  .w-\[34\.8rem\] {
+    width: 34.8rem;
   }
   .w-\[36rem\] {
     width: 36rem;
@@ -243,6 +256,12 @@
   .w-\[1440px\] {
     width: 1440px;
   }
+  .w-full {
+    width: 100%;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -255,8 +274,14 @@
   .items-start {
     align-items: flex-start;
   }
+  .justify-between {
+    justify-content: space-between;
+  }
   .justify-center {
     justify-content: center;
+  }
+  .gap-\[0\.4rem\] {
+    gap: 0.4rem;
   }
   .gap-\[0\.8rem\] {
     gap: 0.8rem;
@@ -285,6 +310,9 @@
   .overflow-hidden {
     overflow: hidden;
   }
+  .rounded-\[50\%\] {
+    border-radius: 50%;
+  }
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -308,6 +336,9 @@
   .border-y-\[\#BFBA73\] {
     border-block-color: #BFBA73;
   }
+  .bg-\[\#025939\] {
+    background-color: #025939;
+  }
   .bg-\[\#A69281\] {
     background-color: #A69281;
   }
@@ -319,6 +350,9 @@
   }
   .bg-\[\#FFFDF7\] {
     background-color: #FFFDF7;
+  }
+  .bg-\[\#FFF\] {
+    background-color: #FFF;
   }
   .bg-\[\#fff\] {
     background-color: #fff;
@@ -352,17 +386,26 @@
   .p-\[0rem\] {
     padding: 0rem;
   }
+  .p-\[6\.4rem\] {
+    padding: 6.4rem;
+  }
   .px-\[1\.6rem\] {
     padding-inline: 1.6rem;
   }
   .px-\[5\.6rem\] {
     padding-inline: 5.6rem;
   }
+  .px-\[6\.4rem\] {
+    padding-inline: 6.4rem;
+  }
   .py-\[0\.8rem\] {
     padding-block: 0.8rem;
   }
   .py-\[1\.6rem\] {
     padding-block: 1.6rem;
+  }
+  .py-\[3\.2rem\] {
+    padding-block: 3.2rem;
   }
   .py-\[4\.8rem\] {
     padding-block: 4.8rem;
@@ -422,9 +465,17 @@
     --tw-leading: 1;
     line-height: 1;
   }
+  .font-\[200\] {
+    --tw-font-weight: 200;
+    font-weight: 200;
+  }
   .font-\[300\] {
     --tw-font-weight: 300;
     font-weight: 300;
+  }
+  .font-\[400\] {
+    --tw-font-weight: 400;
+    font-weight: 400;
   }
   .font-\[600\] {
     --tw-font-weight: 600;
@@ -466,6 +517,9 @@
   }
   .text-\[\#262626\] {
     color: #262626;
+  }
+  .text-\[\#537288\] {
+    color: #537288;
   }
   .text-\[\#A69281\] {
     color: #A69281;

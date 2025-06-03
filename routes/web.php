@@ -17,6 +17,9 @@ $router->post('/registration', 'user/store.php')->only('guest');
 // Logout
 $router->delete('/session/destroy', 'session/destroy.php')->only('auth');
 
+// Post create
+$router->get('/post/create', 'post/create.php')->only('auth');
+
 // Admin panel
 $router->get('/admin', 'admin.php')->only('auth', 'admin');
 
