@@ -7,7 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-amber-500: oklch(76.9% 0.188 70.08);
     --color-white: #fff;
     --font-weight-thin: 100;
     --font-weight-extralight: 200;
@@ -193,11 +192,23 @@
   .my-\[3\.2rem\] {
     margin-block: 3.2rem;
   }
+  .mt-\[1\.6rem\] {
+    margin-top: 1.6rem;
+  }
+  .mt-\[3\.6rem\] {
+    margin-top: 3.6rem;
+  }
   .mt-\[6\.4rem\] {
     margin-top: 6.4rem;
   }
+  .mt-\[9\.6rem\] {
+    margin-top: 9.6rem;
+  }
   .mb-\[1\.6rem\] {
     margin-bottom: 1.6rem;
+  }
+  .mb-\[6\.4rem\] {
+    margin-bottom: 6.4rem;
   }
   .line-clamp-\[2\] {
     overflow: hidden;
@@ -232,6 +243,9 @@
   .h-screen {
     height: 100vh;
   }
+  .w-\[1\.6rem\] {
+    width: 1.6rem;
+  }
   .w-\[16rem\] {
     width: 16rem;
   }
@@ -249,6 +263,9 @@
   }
   .w-\[60\%\] {
     width: 60%;
+  }
+  .w-\[95\.6rem\] {
+    width: 95.6rem;
   }
   .w-\[100\%\] {
     width: 100%;
@@ -330,6 +347,9 @@
   .border-\[\#BFBA73\] {
     border-color: #BFBA73;
   }
+  .border-\[\#\] {
+    border-color: #;
+  }
   .border-transparent {
     border-color: transparent;
   }
@@ -338,6 +358,9 @@
   }
   .bg-\[\#025939\] {
     background-color: #025939;
+  }
+  .bg-\[\#536775\] {
+    background-color: #536775;
   }
   .bg-\[\#A69281\] {
     background-color: #A69281;
@@ -386,8 +409,14 @@
   .p-\[0rem\] {
     padding: 0rem;
   }
+  .p-\[1\.6rem\] {
+    padding: 1.6rem;
+  }
   .p-\[6\.4rem\] {
     padding: 6.4rem;
+  }
+  .px-\[1\.2rem\] {
+    padding-inline: 1.2rem;
   }
   .px-\[1\.6rem\] {
     padding-inline: 1.6rem;
@@ -400,6 +429,9 @@
   }
   .py-\[0\.8rem\] {
     padding-block: 0.8rem;
+  }
+  .py-\[1\.2rem\] {
+    padding-block: 1.2rem;
   }
   .py-\[1\.6rem\] {
     padding-block: 1.6rem;
@@ -419,6 +451,9 @@
   .font-\[Pacifico\] {
     font-family: Pacifico;
   }
+  .font-\[Ubuntu\] {
+    font-family: Ubuntu;
+  }
   .text-\[1\.6rem\] {
     font-size: 1.6rem;
   }
@@ -427,6 +462,12 @@
   }
   .text-\[2\.4rem\] {
     font-size: 2.4rem;
+  }
+  .text-\[2\.8rem\] {
+    font-size: 2.8rem;
+  }
+  .text-\[2rem\] {
+    font-size: 2rem;
   }
   .text-\[3\.2rem\] {
     font-size: 3.2rem;
@@ -477,6 +518,10 @@
     --tw-font-weight: 400;
     font-weight: 400;
   }
+  .font-\[500\] {
+    --tw-font-weight: 500;
+    font-weight: 500;
+  }
   .font-\[600\] {
     --tw-font-weight: 600;
     font-weight: 600;
@@ -512,14 +557,14 @@
   .break-words {
     overflow-wrap: break-word;
   }
+  .text-\[\#259\] {
+    color: #259;
+  }
   .text-\[\#025939\] {
     color: #025939;
   }
   .text-\[\#262626\] {
     color: #262626;
-  }
-  .text-\[\#537288\] {
-    color: #537288;
   }
   .text-\[\#A69281\] {
     color: #A69281;
@@ -533,8 +578,17 @@
   .text-\[\#FFFDF7\] {
     color: #FFFDF7;
   }
+  .text-\[\#\] {
+    color: #;
+  }
   .text-\[\#c55c55\] {
     color: #c55c55;
+  }
+  .text-\[\#f35353\] {
+    color: #f35353;
+  }
+  .text-\[\#fff\] {
+    color: #fff;
   }
   .text-transparent {
     color: transparent;

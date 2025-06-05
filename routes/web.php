@@ -19,6 +19,8 @@ $router->delete('/session/destroy', 'session/destroy.php')->only('auth');
 
 // Post create
 $router->get('/post/create', 'post/create.php')->only('auth');
+$router->post('/post/create', 'post/store.php')->only('auth');
+$router->post('/post/draft', 'post/draft.php')->only('auth');
 
 // Admin panel
 $router->get('/admin', 'admin.php')->only('auth', 'admin');
