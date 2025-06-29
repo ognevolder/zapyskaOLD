@@ -33,3 +33,8 @@ $router->get('/{login}', 'user/show.php');
 // $router->get('/{login}/edit', 'user/edit.php');
 // $router->post('/{login}/edit', 'user/update.php')->only('auth');
 // $router->patch('/{login}/edit', 'user/update.php');
+
+// API
+$router->get('/api/posts', 'api/post/index.php');
+$router->post('/api/posts', 'api/post/store.php');
+$router->patch('/api/posts/{id}', 'api/post/update.php');
